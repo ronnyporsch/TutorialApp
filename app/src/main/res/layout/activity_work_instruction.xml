@@ -1,59 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".WorkInstructionActivity">
+<layout>
 
-    <TextView
-        android:id="@+id/textView_work_instruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".WorkInstructionActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textView_work_instruction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView_work_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_quit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toTopOf="@+id/textView_work_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_switch_to_previous_instruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_switch_to_next_instruction"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_work_instruction" />
+        <Button
+            android:id="@+id/button_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/button_switch_to_next_instruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        <Button
+            android:id="@+id/button_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="previous"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_next"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_work_description" />
 
-        app:layout_constraintStart_toEndOf="@+id/button_switch_to_previous_instruction"
-        app:layout_constraintTop_toBottomOf="@+id/textView_work_instruction" />
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toEndOf="@+id/button_previous"
+            app:layout_constraintTop_toBottomOf="@+id/textView_work_description" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

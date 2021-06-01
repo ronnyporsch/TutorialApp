@@ -1,27 +1,29 @@
 package de.btu.tutorialapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import de.btu.tutorialapp.databinding.ActivityMainBinding;
+
+/**
+ * this is the entrypoint of the application
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);        Button button = findViewById(R.id.button_start_work_instructions);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startWorkInstructions();
-            }
-        });
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.buttonStartWorkInstructions.setOnClickListener(v -> startWorkInstructionActivity());
     }
 
-    private void startWorkInstructions() {
+    /**
+     * calls another window which is then used to display work instructions
+     */
+    private void startWorkInstructionActivity() {
         Intent intent = new Intent(this, WorkInstructionActivity.class);
         startActivity(intent);
     }

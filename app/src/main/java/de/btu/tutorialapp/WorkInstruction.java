@@ -2,6 +2,9 @@ package de.btu.tutorialapp;
 
 import android.graphics.drawable.Drawable;
 
+/**
+ * represents work instructions as a combination of a textual description and an accompanying image
+ */
 public class WorkInstruction {
     private String description;
     private Drawable image;

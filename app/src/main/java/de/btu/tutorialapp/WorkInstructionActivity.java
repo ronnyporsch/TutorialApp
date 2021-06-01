@@ -1,30 +1,26 @@
 package de.btu.tutorialapp;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import androidx.databinding.DataBindingUtil;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
+import de.btu.tutorialapp.databinding.ActivityWorkInstructionBinding;
+
+/**
+ * this activity is used to display work instructions to the user
+ */
 public class WorkInstructionActivity extends AppCompatActivity {
 
+    ActivityWorkInstructionBinding binding;
 
-    private Button buttonQuit;
-    private Button buttonNext;
-    private Button buttonPrevious;
-    private ImageView imageView;
-    private TextView textView;
-
-    private List<WorkInstruction> workInstructionsToDisplay = new LinkedList<>();
+    private final List<WorkInstruction> workInstructionsToDisplay = new LinkedList<>();
     private int currentWorkInstructionToDisplay = 0;
 
     @Override
@@ -36,53 +32,47 @@ public class WorkInstructionActivity extends AppCompatActivity {
         updateDisplayedWorkInstruction(currentWorkInstructionToDisplay);
     }
 
+    /**
+     * adds all work instructions that are to be displayed to a list. the order in which the work instructions
+     * are displayed corresponds to their position in the list
+     */
     private void initWorkInstructions() {
         workInstructionsToDisplay.add(new WorkInstruction("use the screwdriver", ContextCompat.getDrawable(getApplicationContext(), R.drawable.screwdriver)));
-        workInstructionsToDisplay.add(new WorkInstruction("take a break", ContextCompat.getDrawable(getApplicationContext(), R.drawable.btu_logo)));
+        workInstructionsToDisplay.add(new WorkInstruction("take a break", ContextCompat.getDrawable(getApplicationContext(), R.drawable.break_icon)));
         workInstructionsToDisplay.add(new WorkInstruction("use the chainsaw", ContextCompat.getDrawable(getApplicationContext(), R.drawable.chainsaw)));
     }
 
+    /**
+     * initializes the graphical user interface by binding it to a layout file and setting onClickListeners to all buttons
+     */
     private void initGUI() {
-        setContentView(R.layout.activity_work_instruction);
-        buttonQuit = findViewById(R.id.button_quit);
-        buttonNext = findViewById(R.id.button_switch_to_next_instruction);
-        buttonPrevious = findViewById(R.id.button_switch_to_previous_instruction);
-        imageView = findViewById(R.id.imageView);
-        textView = findViewById(R.id.textView_work_instruction);
-
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentWorkInstructionToDisplay < workInstructionsToDisplay.size() - 1) {
-                    currentWorkInstructionToDisplay++;
-                    updateDisplayedWorkInstruction(currentWorkInstructionToDisplay);
-                } else
-                    Toast.makeText(getApplicationContext(), "all instructions have been completed", Toast.LENGTH_SHORT).show();
-            }
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_work_instruction);
+        binding.buttonNext.setOnClickListener(v -> {
+            if (currentWorkInstructionToDisplay < workInstructionsToDisplay.size() - 1) {
+                currentWorkInstructionToDisplay++;
+                updateDisplayedWorkInstruction(currentWorkInstructionToDisplay);
+            } else
+                Toast.makeText(getApplicationContext(), "all instructions have been completed", Toast.LENGTH_SHORT).show();
         });
 
-        buttonPrevious.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentWorkInstructionToDisplay > 0) {
-                    currentWorkInstructionToDisplay--;
-                    updateDisplayedWorkInstruction(currentWorkInstructionToDisplay);
-                } else
-                    Toast.makeText(getApplicationContext(), "this is the first instruction", Toast.LENGTH_SHORT).show();
-            }
+        binding.buttonPrevious.setOnClickListener(v -> {
+            if (currentWorkInstructionToDisplay > 0) {
+                currentWorkInstructionToDisplay--;
+                updateDisplayedWorkInstruction(currentWorkInstructionToDisplay);
+            } else
+                Toast.makeText(getApplicationContext(), "this is the first instruction", Toast.LENGTH_SHORT).show();
         });
 
-        buttonQuit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        binding.buttonQuit.setOnClickListener(v -> finish());
     }
 
+    /**
+     * updates the imageView and textView with a new work instruction
+     * @param numberOfTheInstruction the position in the list of work instructions that shall be displayed
+     */
     private void updateDisplayedWorkInstruction(int numberOfTheInstruction) {
-        textView.setText(workInstructionsToDisplay.get(numberOfTheInstruction).getDescription());
-        imageView.setImageDrawable(workInstructionsToDisplay.get(numberOfTheInstruction).getImage());
+        binding.textViewWorkDescription.setText(String.format(Locale.getDefault(), "Step %d: %s", numberOfTheInstruction + 1, workInstructionsToDisplay.get(numberOfTheInstruction).getDescription()));
+        binding.imageView.setImageDrawable(workInstructionsToDisplay.get(numberOfTheInstruction).getImage());
     }
 
 
