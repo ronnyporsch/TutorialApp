@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TutorialApp</string>
     <string name="start_work_instructions">start work instructions</string>
+    <string name="quit">Quit</string>
+    <string name="previous">previous</string>
+    <string name="next">next</string>
 </resources>
