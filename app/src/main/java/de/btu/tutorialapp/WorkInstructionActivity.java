@@ -43,7 +43,7 @@ public class WorkInstructionActivity extends AppCompatActivity {
     }
 
     /**
-     * initializes the graphical user interface by binding it to a layout file and setting onClickListeners to all buttons
+     * initializes the graphical user interface by binding it to a layout file and setting onClickListeners for all buttons
      */
     private void initGUI() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_work_instruction);
